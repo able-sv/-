@@ -4,8 +4,13 @@ var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
 
+
+
+
 var img2 = new Image();
 img2.src = '스브.png';
+
+var currentImage = img2; //기본 이미지로 초기화
 
 var img3 = new Image();
 img3.src = '스브2.png';
@@ -38,6 +43,8 @@ class Cactus {
        // ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(img1, this.x, this.y);
     }
+
+   
 }
 
 var timer = 0;
@@ -45,7 +52,7 @@ var cactus여러개 = [];
 var 점프timer = 0;
 var animation;
 
-var currentImage = img2; //기본 이미지로 초기화
+
 var 점프 = false;
 
 
@@ -64,6 +71,7 @@ function 프레임마다실행(){
         //x좌표가 0미만이면 제거
         if (a.x < 0) {
             o.splice(i, 1)
+        
         }
         a.x-=2;
 
@@ -112,6 +120,26 @@ function 프레임마다실행(){
 프레임마다실행();
 
 
+ //게임 오버 시 버튼 표시
+ var restartButton = document.getElementById('restartButton');
+ restartButton.addEventListener('click', 재시작);
+
+
+ function 재시작() {
+    //게임 초기화 로직
+    cactus여러개 =[];
+    dino.y=200;
+
+    //버튼 숨기기
+ 
+    restartButton.style.display='none';
+
+    //다시 시작할때 애니메이션 재시작
+    프레임마다실행();
+}
+
+
+
 //충돌확인
 
 function 충돌하냐(dino, cactus){
@@ -119,10 +147,15 @@ function 충돌하냐(dino, cactus){
     var y축차이 = cactus.y - (dino.y + dino.height);
     if (x축차이 < 0 && y축차이 < 0){
         ctx.clearRect(0,0, canvas.width, canvas.height);
+       
+       //게임 오버 시 버튼 표시
+       restartButton.style.display='block';
+       
         cancelAnimationFrame(animation)
+
+       
     }
 }
-
 
 
 
@@ -144,3 +177,4 @@ document.addEventListener('keydown', function(e){
         dino.y = originalCenterY - dino.height / 2;
     }
 });
+
