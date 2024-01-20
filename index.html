@@ -3,12 +3,38 @@
 <head>
     <meta charset="utf-8">
     <title>버섯시러</title>
+    <style>
+        body {
+            margin : 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px soild #000;
+        }
+
+        #restartButton {
+            display: none;
+            position: fixed;
+            top: 400px;
+            left: 10%;
+            transform: translateX(-50%);
+
+        }
+
+
+    </style>
 </head>
 <body>
     <br>
     <br>
+    <p>
     스페이스를 눌러 버섯을 피하세요.
+</p>
     <canvas id="canvas"></canvas>
+    <button id="restartButton" style="display: none;" onclick="다시하기()">다시하기</button>
     
     <script src="main.js"></script>
 
